@@ -8,7 +8,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     // Dummy signup logic
-    dispatch(setUserData({ isAdmin, email, _id: '1' }));
+    dispatch(setUserData({ email, _id: '1' }));
     navigate('/');
   };
 
