@@ -12,16 +12,34 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Dummy authentication logic
-    if (((email === 'user1@example.com') || (email === 'user2@example.com')) && password === 'password') {
-      dispatch(setUserData({ email, _id: '1' })); // Remove isAdmin
-      navigate('/');
-    } else {
-      alert('Invalid Credentials');
+    
+    try {
+      const response = await fetch('http://localhost:5001/api/user/login', { // Corrected URL path
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+  
+      if (response.ok) {
+        dispatch(setUserData({ email: data.email, _id: data._id })); // Adjust based on your backend response
+        navigate('/');
+      } else {
+        alert(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login. Please try again.');
     }
   };
+  
+
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
