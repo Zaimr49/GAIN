@@ -27,7 +27,7 @@ connectToDatabase().then((client) => {
   // Make the MongoDB client available in the request object
   app.use((req, res, next) => {
     req.dbClient = client;
-    req.db = client.db('userdetails'); // Replace with your database name
+    req.db = client.db('userdetails'); 
     next();
   });
 
