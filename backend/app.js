@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const passport = require('./auth');
@@ -13,7 +14,7 @@ app.use(express.json());
 
 // Initialize session middleware
 app.use(session({
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -27,7 +28,7 @@ connectToDatabase().then((client) => {
   // Make the MongoDB client available in the request object
   app.use((req, res, next) => {
     req.dbClient = client;
-    req.db = client.db('userdetails'); 
+    req.db = client.db('investment_advisor_db'); // Replace with your database name
     next();
   });
 
