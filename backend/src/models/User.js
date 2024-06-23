@@ -10,6 +10,7 @@ const userSchema = new Schema({
   name: { type: String, required: [true, "Name is required"] },
   age: { type: Number, required: [true, "Age is required"] },
   gender: { type: String, required: [true, "Gender is required"] },
+  googleId: { type: String }, // Added googleId field
 });
 
 // Pre Hash Function

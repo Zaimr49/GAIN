@@ -1,28 +1,23 @@
 const express = require('express');
-const passport = require('../../auth');
+const passport = require('../Auth/googleAuth'); // Adjust the path as needed
+
 const router = express.Router();
 
-// Route to start OAuth2.0 authentication with Google
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// Callback route that Google redirects to after authentication
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/' }),
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful authentication, redirect to your app's main page or dashboard
-    res.redirect('/dashboard');
+    res.redirect('/login/success'); // Redirect to login success route
   }
 );
 
-// Route to log out the user
-router.get('/logout', (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      console.error('Error logging out:', err);
-      return res.status(500).send('Error logging out');
-    }
-    res.redirect('/');
-  });
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({ message: "User logged in", user: req.user });
+  } else {
+    res.status(400).json({ message: "Not authorized" });
+  }
 });
 
 module.exports = router;

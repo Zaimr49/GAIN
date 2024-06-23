@@ -1,6 +1,11 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -68,6 +73,112 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+// Existing controller functions (getAllUsers, getUserById, createUser, loginUser)
+
+// const googleSignup = async (req, res) => {
+//   const { token } = req.body;
+
+//   try {
+//     const ticket = await client.verifyIdToken({
+//       idToken: token,
+//       audience: process.env.GOOGLE_CLIENT_ID,
+//     });
+
+//     const { name, email, picture, sub } = ticket.getPayload();
+
+//     let user = await User.findOne({ googleId: sub });
+
+//     if (!user) {
+//       user = new User({
+//         googleId: sub,
+//         name: name,
+//         email: email,
+//         image: picture,
+//         username: sub, // Example: using Google ID as username
+//         password: 'temporaryPassword', // Example: temporary password for non-local users
+//         age: 22, // Example: default age
+//         gender: 'Other', // Example: default gender
+//       });
+
+//       await user.save();
+//     }
+
+//     res.status(200).json({ message: 'User signed up successfully', user });
+//   } catch (error) {
+//     console.error('Google signup error:', error);
+//     res.status(500).json({ message: 'Google signup failed', error: error.message });
+//   }
+// };
+// Google OAuth signup
+const googleSignup = async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const { name, email, picture, sub } = ticket.getPayload();
+
+    let user = await User.findOne({ googleId: sub });
+
+    if (user) {
+      // User already exists, return an error
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    // User does not exist, create a new user
+    user = new User({
+      googleId: sub,
+      name: name,
+      email: email,
+      image: picture,
+      username: sub, // Example: using Google ID as username
+      password: 'temporaryPassword', // Example: temporary password for non-local users
+      age: 22, // Example: default age
+      gender: 'Other', // Example: default gender
+    });
+
+    await user.save();
+
+    res.status(200).json({ message: 'User signed up successfully', user });
+  } catch (error) {
+    console.error('Google signup error:', error);
+    res.status(500).json({ message: 'Google signup failed', error: error.message });
+  }
+};
+
+const googleLogin = async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const { email, sub } = ticket.getPayload();
+
+    let user = await User.findOne({ googleId: sub });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found. Please sign up.' });
+    }
+
+    // User found, log them in
+    res.status(200).json({ message: 'Login successful', user });
+  } catch (error) {
+    console.error('Google login error:', error);
+    res.status(500).json({ message: 'Google login failed', error: error.message });
+  }
+};
 
 
-module.exports = { getAllUsers, getUserById, createUser, loginUser };
+module.exports = { getAllUsers, getUserById, createUser, loginUser, googleSignup,googleLogin };
+
+
+
+
+
+

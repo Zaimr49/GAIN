@@ -2,8 +2,12 @@
 
 var User = require("../models/User");
 
-var bcrypt = require('bcrypt'); // Get all users
+var bcrypt = require('bcrypt');
 
+var _require = require('google-auth-library'),
+    OAuth2Client = _require.OAuth2Client;
+
+var client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Get all users
 
 var getAllUsers = function getAllUsers(req, res) {
   var users;
@@ -211,11 +215,183 @@ var loginUser = function loginUser(req, res) {
       }
     }
   }, null, null, [[1, 15]]);
+}; // Existing controller functions (getAllUsers, getUserById, createUser, loginUser)
+// const googleSignup = async (req, res) => {
+//   const { token } = req.body;
+//   try {
+//     const ticket = await client.verifyIdToken({
+//       idToken: token,
+//       audience: process.env.GOOGLE_CLIENT_ID,
+//     });
+//     const { name, email, picture, sub } = ticket.getPayload();
+//     let user = await User.findOne({ googleId: sub });
+//     if (!user) {
+//       user = new User({
+//         googleId: sub,
+//         name: name,
+//         email: email,
+//         image: picture,
+//         username: sub, // Example: using Google ID as username
+//         password: 'temporaryPassword', // Example: temporary password for non-local users
+//         age: 22, // Example: default age
+//         gender: 'Other', // Example: default gender
+//       });
+//       await user.save();
+//     }
+//     res.status(200).json({ message: 'User signed up successfully', user });
+//   } catch (error) {
+//     console.error('Google signup error:', error);
+//     res.status(500).json({ message: 'Google signup failed', error: error.message });
+//   }
+// };
+// Google OAuth signup
+
+
+var googleSignup = function googleSignup(req, res) {
+  var token, ticket, _ticket$getPayload, name, email, picture, sub, user;
+
+  return regeneratorRuntime.async(function googleSignup$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          token = req.body.token;
+          _context5.prev = 1;
+          _context5.next = 4;
+          return regeneratorRuntime.awrap(client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID
+          }));
+
+        case 4:
+          ticket = _context5.sent;
+          _ticket$getPayload = ticket.getPayload(), name = _ticket$getPayload.name, email = _ticket$getPayload.email, picture = _ticket$getPayload.picture, sub = _ticket$getPayload.sub;
+          _context5.next = 8;
+          return regeneratorRuntime.awrap(User.findOne({
+            googleId: sub
+          }));
+
+        case 8:
+          user = _context5.sent;
+
+          if (!user) {
+            _context5.next = 11;
+            break;
+          }
+
+          return _context5.abrupt("return", res.status(400).json({
+            message: 'User already exists'
+          }));
+
+        case 11:
+          // User does not exist, create a new user
+          user = new User({
+            googleId: sub,
+            name: name,
+            email: email,
+            image: picture,
+            username: sub,
+            // Example: using Google ID as username
+            password: 'temporaryPassword',
+            // Example: temporary password for non-local users
+            age: 22,
+            // Example: default age
+            gender: 'Other' // Example: default gender
+
+          });
+          _context5.next = 14;
+          return regeneratorRuntime.awrap(user.save());
+
+        case 14:
+          res.status(200).json({
+            message: 'User signed up successfully',
+            user: user
+          });
+          _context5.next = 21;
+          break;
+
+        case 17:
+          _context5.prev = 17;
+          _context5.t0 = _context5["catch"](1);
+          console.error('Google signup error:', _context5.t0);
+          res.status(500).json({
+            message: 'Google signup failed',
+            error: _context5.t0.message
+          });
+
+        case 21:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[1, 17]]);
+};
+
+var googleLogin = function googleLogin(req, res) {
+  var token, ticket, _ticket$getPayload2, email, sub, user;
+
+  return regeneratorRuntime.async(function googleLogin$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          token = req.body.token;
+          _context6.prev = 1;
+          _context6.next = 4;
+          return regeneratorRuntime.awrap(client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID
+          }));
+
+        case 4:
+          ticket = _context6.sent;
+          _ticket$getPayload2 = ticket.getPayload(), email = _ticket$getPayload2.email, sub = _ticket$getPayload2.sub;
+          _context6.next = 8;
+          return regeneratorRuntime.awrap(User.findOne({
+            googleId: sub
+          }));
+
+        case 8:
+          user = _context6.sent;
+
+          if (user) {
+            _context6.next = 11;
+            break;
+          }
+
+          return _context6.abrupt("return", res.status(404).json({
+            message: 'User not found. Please sign up.'
+          }));
+
+        case 11:
+          // User found, log them in
+          res.status(200).json({
+            message: 'Login successful',
+            user: user
+          });
+          _context6.next = 18;
+          break;
+
+        case 14:
+          _context6.prev = 14;
+          _context6.t0 = _context6["catch"](1);
+          console.error('Google login error:', _context6.t0);
+          res.status(500).json({
+            message: 'Google login failed',
+            error: _context6.t0.message
+          });
+
+        case 18:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, [[1, 14]]);
 };
 
 module.exports = {
   getAllUsers: getAllUsers,
   getUserById: getUserById,
   createUser: createUser,
-  loginUser: loginUser
+  loginUser: loginUser,
+  googleSignup: googleSignup,
+  googleLogin: googleLogin
 };

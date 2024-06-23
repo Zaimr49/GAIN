@@ -29,7 +29,11 @@ var userSchema = new Schema({
   gender: {
     type: String,
     required: [true, "Gender is required"]
-  }
+  },
+  googleId: {
+    type: String
+  } // Added googleId field
+
 }); // Pre Hash Function
 
 userSchema.pre("save", function _callee(next) {
