@@ -13,6 +13,14 @@ const userSchema = new Schema({
   googleId: { type: String }, // Added googleId field
 });
 
+const userDataSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  preferences: { type: Map, of: String },
+  settings: { type: Map, of: String }
+});
+
+const UserData = mongoose.model('UserData', userDataSchema);
+
 // Pre Hash Function
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
