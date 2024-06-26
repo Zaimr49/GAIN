@@ -6,6 +6,11 @@ const userDataSchema = new mongoose.Schema({
   settings: { type: Map, of: String }
 });
 
-const UserData = mongoose.model('UserData', userDataSchema);
+let UserData;
+try {
+  UserData = mongoose.model('UserData');
+} catch (error) {
+  UserData = mongoose.model('UserData', userDataSchema);
+}
 
 module.exports = UserData;

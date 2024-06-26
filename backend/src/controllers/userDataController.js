@@ -1,4 +1,4 @@
-const UserData = require('../models/userDataModel');
+const UserData = require('../models/UserDataModel');
 
 // Get user data
 const getUserData = async (req, res) => {
