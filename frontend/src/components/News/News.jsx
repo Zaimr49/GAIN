@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Container } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Grid, Container, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import StockChart from '../StockChart/StockChart.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({
   typography: {
     h3: {
-      fontFamily: 'Roboto, sans-serif', // Change this to your preferred font
-      fontWeight: 700, // Adjust the font weight as needed
+      fontFamily: 'Roboto, sans-serif',
+      fontWeight: 700,
     },
     h5: {
-      fontFamily: 'Arial, sans-serif', // Change this to your preferred font
+      fontFamily: 'Arial, sans-serif',
+      fontWeight: 500,
+      fontSize: '1rem',
     },
   },
 });
 
+const stockSymbols = [
+  { symbol: 'AAPL', name: 'Apple Inc.' },
+  { symbol: 'AMZN', name: 'Amazon.com Inc.' },
+  { symbol: 'GOOGL', name: 'Alphabet Inc.' },
+  { symbol: 'MSFT', name: 'Microsoft Corporation' },
+  { symbol: 'TSLA', name: 'Tesla, Inc.' },
+];
+
 function News() {
   const [news, setNews] = useState([]);
+  const [selectedStock, setSelectedStock] = useState(stockSymbols[0].symbol);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -41,40 +53,56 @@ function News() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-        <Typography variant="h3" align="center" gutterBottom>
+        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5 }}>
           Latest News
         </Typography>
         <Grid container spacing={4} justifyContent="center">
           {news.map((article, index) => (
             <Grid item key={index} sx={{ mb: 2 }}>
-              <Card sx={{ 
-                maxWidth: 345, 
-                height: '100%', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                transition: 'transform 0.3s', 
-                '&:hover': { transform: 'scale(1.05)' } 
-              }}>
+              <Card sx={{ maxWidth: 345, height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.05)' } }}>
                 <CardActionArea href={article.article_url} target="_blank" rel="noopener noreferrer">
                   {article.image_url && (
                     <CardMedia
                       component="img"
-                      height="200"
+                      height="140"
                       image={article.image_url}
                       alt={article.title}
                     />
                   )}
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="div" sx={{fontSize:"20px",ml:1}}>
+                    <Typography gutterBottom variant="h5" component="div">
                       {article.title}
                     </Typography>
-                    
+                    <Typography variant="body2" color="text.secondary">
+                      {article.summary}
+                    </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
             </Grid>
           ))}
         </Grid>
+
+        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
+          Stock Charts of Multiple
+        </Typography>
+
+        <FormControl sx={{ mb: 2, minWidth: 200 }}>
+          <InputLabel>Company</InputLabel>
+          <Select
+            value={selectedStock}
+            onChange={(e) => setSelectedStock(e.target.value)}
+            label="Company"
+          >
+            {stockSymbols.map((stock) => (
+              <MenuItem key={stock.symbol} value={stock.symbol}>
+                {stock.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <StockChart symbol={selectedStock} />
       </Container>
     </ThemeProvider>
   );
