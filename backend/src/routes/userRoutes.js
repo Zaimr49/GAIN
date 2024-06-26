@@ -1,13 +1,10 @@
 const express = require('express');
-const { getAllUsers, getUserById, createUser, loginUser, googleSignup,googleLogin } = require('../controllers/userController');
+const {getAllUsers, getUserById, createUser, loginUser, googleSignup, googleLogin} = require('../controllers/userController');
+const {getUserData, upsertUserData} = require('../controllers/userDataController');
+const { ensureAuthenticated } = require('../Auth/authMiddleware');
 const router = express.Router();
 
-const { getUserData, upsertUserData } = require('../controllers/userDataController');
-const { ensureAuthenticated } = require('../middleware/authMiddleware');
-
-router.get('/:userId', ensureAuthenticated, getUserData);
-router.post('/:userId', ensureAuthenticated, upsertUserData);
-
+// User routes
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);
 router.post('/signup', createUser);
@@ -17,5 +14,8 @@ router.post('/login', loginUser);
 router.post('/googleSignup', googleSignup);
 router.post('/googleLogin', googleLogin);
 
+// User data routes (with authentication)
+router.get('/userdata/:userId', ensureAuthenticated, getUserData);
+router.post('/userdata/:userId', ensureAuthenticated, upsertUserData);
 
 module.exports = router;
