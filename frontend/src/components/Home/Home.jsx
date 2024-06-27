@@ -9,10 +9,13 @@ import {
   Select,
   Button,
   FormHelperText,
+  OutlinedInput,
+  InputAdornment,
+  MenuItem,
 } from '@mui/material';
 
 function Home() {
-  const { form, use } = useForm({
+  const { form, use, reset } = useForm({
     defaultValues: {
       age: '',
       risk: '',
@@ -27,7 +30,10 @@ function Home() {
       }
       return errors;
     },
-    onSubmit: (values) => alert(JSON.stringify(values, undefined, 2)),
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, undefined, 2));
+      reset(); // Reset the form fields
+    },
   });
 
   const errors = use("errors");
@@ -39,7 +45,7 @@ function Home() {
       </Typography>
 
       <form ref={form} noValidate>
-        <FormControl fullWidth margin="normal" error={!!errors.age}>
+        <FormControl fullWidth margin="normal" variant="filled" error={!!errors.age}>
           <InputLabel>Your Age*</InputLabel>
           <Select
             name="age"
@@ -55,7 +61,7 @@ function Home() {
           <FormHelperText>{errors.age}</FormHelperText>
         </FormControl>
 
-        <FormControl fullWidth margin="normal" error={!!errors.risk}>
+        <FormControl fullWidth margin="normal" variant="filled" error={!!errors.risk}>
           <InputLabel>Risk Involvement*</InputLabel>
           <Select
             name="risk"
@@ -70,18 +76,20 @@ function Home() {
           <FormHelperText>{errors.risk}</FormHelperText>
         </FormControl>
 
-        <TextField
-          label="Amount to be invested"
-          name="amount"
-          type="number"
-          required
-          fullWidth
-          margin="normal"
-          error={!!errors.amount}
-          helperText={errors.amount}
-        />
+        <FormControl fullWidth margin="normal" error={!!errors.amount}>
+          <InputLabel htmlFor="outlined-adornment-amount">Amount*</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            name="amount"
+            type="number"
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            label="Amount"
+            required
+          />
+          <FormHelperText>{errors.amount}</FormHelperText>
+        </FormControl>
 
-        <FormControl fullWidth margin="normal" error={!!errors.term}>
+        <FormControl fullWidth margin="normal" variant="filled" error={!!errors.term}>
           <InputLabel>Term of Investment*</InputLabel>
           <Select
             name="term"
@@ -98,7 +106,7 @@ function Home() {
           <FormHelperText>{errors.term}</FormHelperText>
         </FormControl>
 
-        <FormControl fullWidth margin="normal" error={!!errors.diversity}>
+        <FormControl fullWidth margin="normal" variant="filled" error={!!errors.diversity}>
           <InputLabel>How Diverse*</InputLabel>
           <Select
             name="diversity"

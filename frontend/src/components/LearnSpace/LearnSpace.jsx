@@ -10,7 +10,7 @@ function LearnSpace() {
   useEffect(() => {
     if (!user.email) {
       alert('Please Login or Create an Account.');
-      navigate('/');
+      navigate('/login');
     }
   }, [user, navigate]);
 
