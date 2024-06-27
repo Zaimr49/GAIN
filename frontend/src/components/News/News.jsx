@@ -22,10 +22,16 @@ const theme = createTheme({
 const stockSymbols = [
   { symbol: 'AAPL', name: 'Apple Inc.' },
   { symbol: 'AMZN', name: 'Amazon.com Inc.' },
-  { symbol: 'GOOGL', name: 'Alphabet Inc.' },
+  { symbol: 'GOOGL', name: 'Google Inc.' },
   { symbol: 'MSFT', name: 'Microsoft Corporation' },
   { symbol: 'TSLA', name: 'Tesla, Inc.' },
+  { symbol: 'RELI', name: 'Reliance Industries Limited' },
+  { symbol: 'TCS', name: 'Tata Consultancy Services' },
+  { symbol: 'INFY', name: 'Infosys Limited' },
+  { symbol: 'HDB', name: 'HDFC Bank Limited' },
+  { symbol: 'WIT', name: 'Wipro Limited' },
 ];
+
 
 function News() {
   const [news, setNews] = useState([]);
@@ -59,12 +65,12 @@ function News() {
         <Grid container spacing={4} justifyContent="center">
           {news.map((article, index) => (
             <Grid item key={index} sx={{ mb: 2 }}>
-              <Card sx={{ maxWidth: 345, height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.05)' } }}>
+              <Card sx={{ width: 345, height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.05)' } }}>
                 <CardActionArea href={article.article_url} target="_blank" rel="noopener noreferrer">
                   {article.image_url && (
                     <CardMedia
                       component="img"
-                      height="140"
+                      height="200"
                       image={article.image_url}
                       alt={article.title}
                     />
@@ -83,8 +89,8 @@ function News() {
           ))}
         </Grid>
 
-        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
-          Stock Charts of Multiple
+        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5, mb: 3 }}>
+          Stock Charts
         </Typography>
 
         <FormControl sx={{ mb: 2, minWidth: 200 }}>
