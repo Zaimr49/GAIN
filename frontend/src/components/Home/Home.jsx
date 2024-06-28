@@ -10,8 +10,8 @@ import {
   FormHelperText,
   OutlinedInput,
   InputAdornment,
-  
 } from '@mui/material';
+import CompanySelector from '../CompanySelector/CompanySelector'; 
 
 function Home() {
   const { form, use, reset } = useForm({
@@ -38,7 +38,9 @@ function Home() {
   const errors = use("errors");
 
   return (
+
     <Container>
+      <CompanySelector />
       <Typography variant="h4" gutterBottom sx={{ marginTop: 5 }}>
         Investment Planner
       </Typography>
@@ -52,10 +54,11 @@ function Home() {
             native
           >
             <option aria-label="None" value="" />
-            <option value={16}>16-18</option>
-            <option value={18}>18-24</option>
-            <option value={24}>24-34</option>
-            <option value={34}>34+</option>
+            <option value={1}>16-18</option>
+            <option value={2}>18-24</option>
+            <option value={3}>24-34</option>
+            <option value={4}>34-45</option>
+            <option value={5}>45+</option>
           </Select>
           <FormHelperText>{errors.age}</FormHelperText>
         </FormControl>
@@ -68,9 +71,9 @@ function Home() {
             native
           >
             <option aria-label="None" value="" />
-            <option value="high">High Risk - High Return</option>
-            <option value="medium">Medium Risk - Average Return</option>
-            <option value="low">Low Risk - Low Return</option>
+            <option value={3}>High risk- high return</option>
+            <option value={2}>medium risk - medium return</option>
+            <option value={1}>low risk - low return</option>
           </Select>
           <FormHelperText>{errors.risk}</FormHelperText>
         </FormControl>
@@ -96,11 +99,9 @@ function Home() {
             native
           >
             <option aria-label="None" value="" />
-            <option value="intraday">Intraday</option>
-            <option value="weeks">Weeks</option>
-            <option value="1-3m">1-3 Months</option>
-            <option value="1yr">1 Year</option>
-            <option value="1-3yr">1-3 Years</option>
+            <option value={1}>1-3 years</option>
+            <option value={2}>3-5 years</option>
+            <option value={3}>5-10 years</option>
           </Select>
           <FormHelperText>{errors.term}</FormHelperText>
         </FormControl>
@@ -113,10 +114,8 @@ function Home() {
             native
           >
             <option aria-label="None" value="" />
-            <option value="one">Just One</option>
-            <option value="multiple-stocks">Multiple Stocks</option>
-            <option value="multiple-sectors">Multiple Sectors</option>
-            <option value="multiple-fields">Multiple Fields</option>
+            <option value={1}>single stock</option>
+            <option value={2}>multiple stocks</option>
           </Select>
           <FormHelperText>{errors.diversity}</FormHelperText>
         </FormControl>
@@ -125,7 +124,6 @@ function Home() {
           type="submit"
           variant="contained"
           color="primary"
-          fullWidth
           style={{ marginTop: '20px' }}
         >
           Suggested Investments
