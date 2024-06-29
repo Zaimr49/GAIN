@@ -60,13 +60,14 @@ const companies = [
   { code: 'KR', name: 'The Kroger Co.' },
   { code: 'SYY', name: 'Sysco Corporation' },
   { code: 'ADM', name: 'Archer-Daniels-Midland Company' },
-  { code: 'DIS', name: 'The Walt Disney Company' },
+  { code: 'DIS', name: 'DIS - The Walt Disney Company' },
   { code: 'CMCSA', name: 'Comcast Corporation' },
   { code: 'TMUS', name: 'T-Mobile US, Inc.' },
   { code: 'VZ', name: 'Verizon Communications Inc.' },
   { code: 'T', name: 'AT&T Inc.' },
   { code: 'CHTR', name: 'Charter Communications, Inc.' },
   { code: 'NWS', name: 'News Corporation' },
+  { code: 'GILD', name: 'Gilead Sciences, Inc.' },
   { code: 'NKE', name: 'NIKE, Inc.' },
   { code: 'ADDYY', name: 'adidas AG' },
   { code: 'PUMA', name: 'Puma SE' },
@@ -87,7 +88,7 @@ const companies = [
   { code: 'JBLU', name: 'JetBlue Airways Corporation' },
   { code: 'ALK', name: 'Alaska Air Group, Inc.' },
   { code: 'SAVE', name: 'Spirit Airlines, Inc.' },
-  { code: 'GILD', name: 'Gilead Sciences, Inc.' },
+  
 ];
 
 const CompanySelector = () => {
