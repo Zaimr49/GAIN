@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  
+  .doodle-left,
+  .doodle-right {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-top: 100px;
+    gap: 20px;
+  }
+
+  
+  .form-container {
+    width: 100%;
+  }
+  
