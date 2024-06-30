@@ -12,7 +12,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { LovingDoodle, MeditatingDoodle, JumpingDoodle, CoffeeDoodle, DoggieDoodle, ReadingDoodle } from 'react-open-doodles';
-import CompanySelector from '../CompanySelector/CompanySelector';
+import CompanyStocksPrediction from '../CompanyStocksPrediction/CompanyStocksPrediction';
 import './Home.css'; 
 
 function Home() {
@@ -48,7 +48,7 @@ function Home() {
           <DoggieDoodle accent="#ff4500" ink="#1876d1" />
         </div>
         <div className="form-container">
-          <CompanySelector />
+          <CompanyStocksPrediction />
           <Typography variant="h4" gutterBottom sx={{ marginTop: 5 }}>
             Investment Planner
           </Typography>
