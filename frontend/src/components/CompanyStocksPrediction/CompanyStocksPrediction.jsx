@@ -175,12 +175,12 @@ const CompanyStocksPrediction = () => {
           {prediction.prediction === "Up" ? (
             <>
               The stock for <strong>{prediction.company}</strong> is predicted
-              to go <strong>UP</strong>.
+              to go <strong style={{ color: "green" }}><u>UP</u></strong>.
             </>
           ) : (
             <>
               The stock for <strong>{prediction.company}</strong> is predicted
-              to go <strong>DOWN</strong>.
+              to go <strong style={{ color: "red" }}><u>DOWN</u></strong>.
             </>
           )}
         </DialogContent>

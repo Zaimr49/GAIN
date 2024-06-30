@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import './App.css'; 
+// import './App.css'; 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Container } from '@mui/material';

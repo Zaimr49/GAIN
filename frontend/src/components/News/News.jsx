@@ -7,10 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({
   typography: {
-    h3: {
-      fontFamily: 'Roboto, sans-serif',
-      fontWeight: 700,
-    },
+  
     h5: {
       fontFamily: 'Arial, sans-serif',
       fontWeight: 500,
@@ -59,9 +56,9 @@ function News() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5 }}>
-          Latest News
-        </Typography>
+      <Typography variant="h4" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
+            Latest News
+          </Typography>
         <Grid container spacing={4} justifyContent="center">
           {news.map((article, index) => (
             <Grid item key={index} sx={{ mb: 2 }}>
@@ -89,9 +86,9 @@ function News() {
           ))}
         </Grid>
 
-        <Typography variant="h3" align="center" gutterBottom sx={{ mt: 5, mb: 3 }}>
-          Stock Charts
-        </Typography>
+        <Typography variant="h4" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
+            Latest News
+          </Typography>
 
         <FormControl sx={{ mb: 2, minWidth: 200 }}>
           <InputLabel>Company</InputLabel>

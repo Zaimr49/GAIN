@@ -10,23 +10,16 @@ function LearnSpace() {
   useEffect(() => {
     if (!user.email) {
       alert('Please Login or Create an Account.');
-      navigate('/');
+      navigate('/login');
     }
   }, [user, navigate]);
 
   return (
     <Container>
-      {user.email && (
-        <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
-            Welcome, {user.email}!
-          </Typography>
-          <Typography variant="h5">LearnSpace</Typography>
-        </Box>
-      )}
+      
       <Box sx={{ textAlign: 'center', marginTop: 8 }}>
         <Typography variant="h4" gutterBottom>
-          Execute as you learn
+          Execute as you Learn
         </Typography>
       </Box>
       <Box sx={{ textAlign: 'center', marginTop: 4 }}>
