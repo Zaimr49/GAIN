@@ -1,2 +1,6 @@
 /models
 investment_model.pkl
+*.h5
+*..h5
+/models/*.h5
+/models/*..h5
