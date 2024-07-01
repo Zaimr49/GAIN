@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    background-color: #282c34;
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .box {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .code {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  pre {
+    margin: 0;
+  }
+  
+  .code-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  
+  .gfg-icon {
+    fill: #2c3e50;
+    stroke: #2c3e50;
+  }
+  .pta {
+    border-radius: 20px;
+    width: 20%;
+    font-size: 1.5em;
+    text-align: center;
+    margin-left: 40%;
+}
+.thumbnail {
+    width: 48%;
+    margin-top: 50px;
+}
+.search-bar {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 50px;
+    padding-left: 5px;
+    margin-left: 500px;
+    margin-bottom: 35px;
+}
+.video-title {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: Arial;
+    line-height: 20px;
+    margin-bottom: 2px;
+    margin-top: 5px;
+    margin-left: 6px;
+    margin-right: 40px;
+    width: 100%;
+}
+.video-author {
+    margin-right: 100px;
+    margin-left: 6px;
+    font-size: 13px;
+    color: rgb(96, 96, 96);
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
+.video-stats {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 13px;
+    color: rgb(96, 96, 96);
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.YT-video {
+    vertical-align: top;
+    width: 100%;
+    display: inline-block;
+    margin-left: 30%;
+}
+.video-channel {
+    vertical-align: top;
+    display: inline-block;
+    width: 40px;
+}
+.video-info {
+    display: inline-block;
+    width: 260px;
+}
+.header {
+    text-align: center;
+    margin-top: 60px;
+}
+.analysis {
+    width: 80%;
+    margin: auto;
+}
+.box {
+    border: solid;
+    border-radius: 10px;
+    background-color: rgb(208, 212, 211);
+    position: relative;
+    padding: 20px;
+}
+.code-button {
+    background: white;
+    margin: 10px;
+    border: 2px;
+    background: #e5e5e5;
+    border-radius: 10px;
+    width: 34px !important;
+    height: 34px !important;
+    cursor: pointer;
+    padding-top: 7px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+h2 {
+    display: flex;
+    margin: 20px;
+}
+.code {
+    white-space: pre;
+    font-family: monospace;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: auto;
+}
+.box{
+    width:80%;
+    margin:auto;
+    margin-top:50px;
+}
+.btn1{
+    border-radius: 10px;
+    background-color: rgb(1, 1, 69);
+    padding:10px;
+}
