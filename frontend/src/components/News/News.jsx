@@ -87,7 +87,7 @@ function News() {
         </Grid>
 
         <Typography variant="h4" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
-            Latest News
+            Stock Charts
           </Typography>
 
         <FormControl sx={{ mb: 2, minWidth: 200 }}>
