@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-// import './App.css'; 
+ import './App.css'; 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Container } from '@mui/material';
@@ -225,17 +225,7 @@ parabolicsar: `//@version=5
 
   return (
        <div>
-    <Container>
-      {user.email && (
-        <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
-            Welcome, {user.email}!
-          </Typography>
-          <Typography variant="h5">Algorithm Trading</Typography>
-        </Box>
-      )}
-    </Container>
-
+    
  
       <div className="header">
         <h1>Algorithms for Trading</h1>

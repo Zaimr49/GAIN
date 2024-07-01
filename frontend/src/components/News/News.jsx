@@ -56,9 +56,9 @@ function News() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-      <Typography variant="h4" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
-            Latest News
-          </Typography>
+      <div className="header" style={{marginBottom:20}}>
+        <h1>Latest News</h1>
+      </div>
         <Grid container spacing={4} justifyContent="center">
           {news.map((article, index) => (
             <Grid item key={index} sx={{ mb: 2 }}>
@@ -86,9 +86,9 @@ function News() {
           ))}
         </Grid>
 
-        <Typography variant="h4" align="center" gutterBottom sx={{ mt: 5,mb:3 }}>
-            Stock Charts
-          </Typography>
+        <div className="header" style={{marginBottom:20}}>
+        <h1>Stock Charts</h1>
+      </div>
 
         <FormControl sx={{ mb: 2, minWidth: 200 }}>
           <InputLabel>Company</InputLabel>
