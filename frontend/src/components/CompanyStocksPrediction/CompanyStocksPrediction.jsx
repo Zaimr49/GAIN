@@ -117,13 +117,13 @@ const CompanyStocksPrediction = () => {
         })
         .then((response) => {
           console.log(response.data);
-          setPrediction(response.data); // Assuming response is 'up' or 'down'
-          setOpen(true); // Open modal
+          setPrediction(response.data); 
+          setOpen(true); 
         })
         .catch((error) => {
-          console.error(error); // Handle any errors
+          console.error(error); 
         });
-      setSelectedCompany(null); // Clear the selected company
+      setSelectedCompany(null); 
     } else {
       alert("Please select a company first.");
     }

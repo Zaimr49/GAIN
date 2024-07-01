@@ -9,17 +9,17 @@ function StockChart({ symbol }) {
 
   useEffect(() => {
     const fetchStockData = async () => {
-      setLoading(true); // Set loading to true when fetching new data
+      setLoading(true); 
       try {
         const API_KEY = "72J5266S0H2QL30G";
         const response = await axios.get(
           `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`
         );
         setStockData(response.data["Time Series (Daily)"]);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching stock data:", error);
-        setLoading(false); // Ensure loading is false even if there's an error
+        setLoading(false); 
       }
     };
 
