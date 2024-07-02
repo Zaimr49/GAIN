@@ -1,0 +1,12 @@
+Flask==2.3.2
+pandas==2.0.3
+numpy==1.24.3
+scikit-learn==1.2.2
+tensorflow==2.12.0
+flask_cors==3.1.0
+gunicorn==20.1.0  # A WSGI HTTP Server for UNIX, often used to serve Flask applications
+Jinja2==3.1.2    # Template engine used by Flask
+Werkzeug==2.3.6  # A WSGI utility library used by Flask
+itsdangerous==2.1.2  # Provides security-related helpers used by Flask
+requests==2.31.0  # HTTP library, often useful for making API calls
+
