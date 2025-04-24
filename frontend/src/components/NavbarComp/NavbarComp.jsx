@@ -113,19 +113,10 @@ const NavbarComp = () => {
             edge="start"
             onClick={toggleDrawer}
           >
-            <MenuIcon />
           </IconButton>
         ) : (
           <>
-            <StyledButton color="inherit" onClick={() => navigate("/")}>
-              Home
-            </StyledButton>
-            <StyledButton color="inherit" onClick={() => navigate("/news")}>
-              News
-            </StyledButton>
-            <StyledButton color="inherit" onClick={() => navigate("/algorithm-trading")}>
-              Algorithm-Trading
-            </StyledButton>
+          <div>Black</div>
             <StyledButton color="inherit" onClick={() => navigate("/learn-space")}>
               Learn Space
             </StyledButton>
